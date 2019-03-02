@@ -1,6 +1,8 @@
 <template>
   <div>
-    <img alt="Vue logo" src="../assets/mic-stand.jpg">
+    <div class="img-container">
+      <img alt="Vue logo" src="../assets/mic-stand.jpg">
+    </div>
     <h1>{{ msg }}</h1>
     <p>Home page</p>
   </div>
@@ -17,8 +19,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-img {
-  /* width: 100%; */
-  max-height: 300px;
+.img-container {
+  width: 100%;
+  overflow: hidden;
+  img {
+    /* width: 100%; */
+    max-height: 300px;
+  }
 }
 </style>

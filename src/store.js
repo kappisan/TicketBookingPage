@@ -6,6 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
   	count: 0,
+  	basket: [1,2,3,4,5,7],
 	events: [
 		{
 			location: "Brixton",
@@ -43,7 +44,9 @@ export default new Vuex.Store({
   },
   getters: {
   	count: state => state.count,
-  	events: state => state.events
+  	events: state => state.events,
+  	basket: state => state.basket,
+  	basketTotal: state => state.basket.length
   },
   actions: {
 

@@ -7,7 +7,7 @@
     <p>{{ date }} {{ time }} <span class="city">{{ city }}</span></h1>
     <p>Tickets available: {{ tickets }}</p>
     <p class="text">{{ desc }}</p>
-    <button v-on:click="addToBasket">Add</button>
+    <button>Book Tickets</button>
   </div>
 </template>
 
@@ -40,11 +40,7 @@ export default {
   methods: {
     ...mapMutations([
       'increment'
-    ]),
-    addToBasket() {
-      this.increment();
-      console.log("add to basket", this.count);
-    }
+    ])
   }
 }
 </script>
@@ -57,6 +53,15 @@ export default {
   display: inline-block;
   margin: 10px;
   vertical-align: top;
+  button {
+    height: 40px;
+    width: 200px;
+    margin-bottom: 20px;
+    color: #fff;
+    border-style: none;
+    background-color: #333;
+    font-size: 16px;
+  };
   .text {
     padding: 20px;
     text-align: justify;
