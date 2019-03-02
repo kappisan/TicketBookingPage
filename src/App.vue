@@ -2,10 +2,13 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link>
-      <router-link to="/about">About</router-link>
       <router-link to="/tickets">Tickets</router-link>
+      <router-link to="/basket"><font-awesome-icon icon="shopping-basket" /></router-link>
     </div>
     <router-view/>
+    <div id="footer">
+      <p>footer</p>
+    </div>
   </div>
 </template>
 
@@ -35,4 +38,17 @@
     }
   }
 }
+#footer {
+  width: 100%;
+  color: #fff;
+  background-color: #000;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
 </style>
+
+<script>
+  
+
+</script>
