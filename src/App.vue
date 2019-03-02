@@ -2,7 +2,7 @@
 	<div id="app">
 		<div id="nav">
 			<router-link to="/">Home</router-link>
-			<router-link to="/tickets">Tickets</router-link>
+			<router-link to="/events">Events</router-link>
 			<div>
 				<router-link to="/basket">{{ basketTotal }} <font-awesome-icon icon="shopping-basket" /></router-link>
 			</div>

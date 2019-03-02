@@ -1,10 +1,11 @@
 <template>
-  <div class="tickets">
+  <div class="events">
     <h1>UPCOMING EVENTS</h1>
 	<Event
 		v-for="event in events"
 		:location="event.location"
 		:date="event.date"
+		:eid="event.eid"
 		:city="event.city"
 		:time="event.time"
 		:tickets="event.tickets"
@@ -20,7 +21,7 @@
 	import { store } from '../store.js';
 
 	export default {
-		name: 'tickets',
+		name: 'events',
 		components: {
 		  Event
 		},

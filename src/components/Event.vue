@@ -5,9 +5,11 @@
     </div>
     <h1>{{ location }}</h1>
     <p>{{ date }} {{ time }} <span class="city">{{ city }}</span></h1>
-    <p>Tickets available: {{ tickets }}</p>
+    <p>Tickets available: {{ ticketsAvaialable }}</p>
     <p class="text">{{ desc }}</p>
-    <button>Book Tickets</button>
+    <router-link :to="'/book/'+ eid">
+      <button>Book Tickets</button>
+    </router-link>
   </div>
 </template>
 
@@ -21,16 +23,20 @@ export default {
   name: 'Event',
   props: {
     img: String,
+    eid: String,
     location: String,
     city: String,
     desc: String,
     date: String,
-    tickets: Number,
+    tickets: Array,
     time: String
   },
   computed: {
     path() {
       return this.img;
+    },
+    ticketsAvaialable() {
+      return 100;
     },
     ...mapGetters([
       // Mounts the "count" getter to the scope of your component.
@@ -41,6 +47,9 @@ export default {
     ...mapMutations([
       'increment'
     ])
+  },
+  mounted: () => {
+    console.log("event mounted event component");
   }
 }
 </script>
