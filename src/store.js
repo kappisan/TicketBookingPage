@@ -111,6 +111,13 @@ const store = new Vuex.Store({
 		if (match) {
 		    state.basket[match].quantity++;
 		}
+    },
+    removeFromBasket(state, cid) {
+    	console.log("incrementBasket");
+		let match = _.findIndex(state.basket, {cid: cid})
+		if (match) {
+		    state.basket.splice(match, 1);
+		}
     }
   },
   getters: {

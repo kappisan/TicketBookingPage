@@ -16,7 +16,7 @@
 				<div v-for="item in basket" class="basket-item">
 					<p>{{ item.quantity }} x {{ item.price }}</p>
 					<p>{{ item.name }}</p>
-					<p><b>Total:</b> {{ item.quantity * item.price }} </p>
+					<p><b>Total:</b> £{{ item.quantity * item.price }} </p>
 				</div>
 			</div>
 

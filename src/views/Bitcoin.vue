@@ -1,6 +1,6 @@
 <template>
 	<div class="tickets">
-		<h1>BITCOIN</h1>
+		<h1>PAY WITH BITCOIN</h1>
 		<h3>Items: {{ basketItems }}</h3>
 		<h3>Total: £{{ basketTotal }}</h3>
 

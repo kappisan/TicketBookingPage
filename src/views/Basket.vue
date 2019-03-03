@@ -2,12 +2,12 @@
 	<div class="tickets">
 		<h1>BASKET</h1>
 		<h3>Items: {{ basketItems }}</h3>
-		<h3>Total: £{{ basketTotal }}</h3>
+		<h3>Basket Total: &nbsp; £{{ basketTotal }}</h3>
 		<div v-for="item in basket" class="basket-item">
 			<p>{{ item.quantity }} x {{ item.price }}</p>
 			<p>{{ item.name }}</p>
-			<p><b>Total:</b> {{ item.quantity * item.price }} </p>
-			<p><font-awesome-icon icon="trash-alt" /></p>
+			<p><b>Total:</b> £{{ item.quantity * item.price }} </p>
+			<p v-on:click="removeFromBasket(item.cid)"><font-awesome-icon icon="trash-alt" /></p>
 		</div>
 
 		<p style="width: 100%; text-align: right; padding: 20px;" ><b>Basket Total: </b> £{{ basketTotal }}</p>
@@ -58,6 +58,12 @@
 		name: 'basket',
 		components: {
 		  Event
+		},
+		methods: {
+			removeFromBasket(cid) {
+				this.$store.commit('removeFromBasket', cid);
+			}
+		    // ...mapMutations(['removeFromBasket']),
 		},
 		computed: {
 			...mapGetters(['basket', 'basketTotal', 'basketItems'])
