@@ -5,7 +5,9 @@
 		<h3>Total: £{{ basketTotal }}</h3>
 		<p v-for="item in basket">{{ item }}</p><br />
 
-		<button>Checkout</button>
+		<router-link to="/checkout">
+			<button>Checkout</button>
+		</router-link>
 	</div>
 
 </template>
