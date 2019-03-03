@@ -10,7 +10,7 @@
 		</div>
 
 		<p style="width: 100%; text-align: right; padding: 20px;" ><b>Basket Total: </b> £{{ basketTotal }}</p>
-		<router-link to="/checkout">
+		<router-link to="/bitcoin">
 			<button><font-awesome-icon :icon="['fab', 'bitcoin']" /> &nbsp; BITCOIN PAYMENT</button>
 		</router-link>
 		<router-link to="/checkout">

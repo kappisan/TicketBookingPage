@@ -106,6 +106,11 @@ export default new Vuex.Store({
 		return state.basket.reduce((memo, item) => {
 			return memo + (item.price * item.quantity);
 		}, 0)
+  	},
+  	basketTotalBTC: state => {
+		return state.basket.reduce((memo, item) => {
+			return memo + (item.price * item.quantity);
+		}, 0) * 0.00035 // @TODO: get BTC exchange rate
   	}
   },
   actions: {

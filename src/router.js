@@ -5,6 +5,7 @@ import Events from './views/Events.vue'
 import Basket from './views/Basket.vue'
 import Checkout from './views/Checkout.vue'
 import Book from './views/Book.vue'
+import Bitcoin from './views/Bitcoin.vue'
 
 Vue.use(Router)
 
@@ -35,6 +36,11 @@ export default new Router({
       path: '/checkout',
       name: 'checkout',
       component: Checkout
+    },
+    {
+      path: '/bitcoin',
+      name: 'bitcoin',
+      component: Bitcoin
     },
     {
       path: '/book/:id',
