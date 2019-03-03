@@ -7,11 +7,13 @@
 			<p>{{ item.quantity }} x {{ item.price }}</p>
 			<p>{{ item.name }}</p>
 			<p><b>Total:</b> {{ item.quantity * item.price }} </p>
+			<p><font-awesome-icon icon="trash-alt" /></p>
 		</div>
 
 		<p style="width: 100%; text-align: right; padding: 20px;" ><b>Basket Total: </b> £{{ basketTotal }}</p>
+
 		<router-link to="/bitcoin">
-			<button><font-awesome-icon :icon="['fab', 'bitcoin']" /> &nbsp; BITCOIN PAYMENT</button>
+			<button class="pay-with-btc"><font-awesome-icon :icon="['fab', 'bitcoin']" /> &nbsp; BITCOIN PAYMENT</button>
 		</router-link>
 		<router-link to="/checkout">
 			<button><font-awesome-icon icon="credit-card" /> &nbsp; PAY BY CARD</button>
@@ -27,6 +29,10 @@
 		color: #fff;
 		border-style: none;
 		height: 40px;
+	}
+
+	.pay-with-btc {
+		background: linear-gradient(to right, #f7931a 60%, #ffae4d 90%);
 	}
 
 	.basket-item {

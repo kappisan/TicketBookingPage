@@ -1,9 +1,25 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import createPersistedState from 'vuex-persistedstate'
+import * as _ from 'lodash'
+
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const vuePersist = {
+  reducer: state => ({
+    basket: state.basket,
+  }),
+  saveState: (key, state, storage) => {
+  	console.log("VUE PERSIST SAVE STATE")
+    requestIdleCallback(() => {
+      storage.setItem(key, JSON.stringify(state));
+    });
+  },
+};
+
+const store = new Vuex.Store({
+  plugins: [createPersistedState()],
   state: {
   	count: 0,
   	basket: [],
@@ -88,6 +104,13 @@ export default new Vuex.Store({
   mutations: {
     addToBasket(state, item) {
       state.basket.push(item)
+    },
+    incrementBasket(state, cid) {
+    	console.log("incrementBasket");
+		let match = _.findIndex(state.basket, {cid: cid})
+		if (match) {
+		    state.basket[match].quantity++;
+		}
     }
   },
   getters: {
@@ -117,3 +140,11 @@ export default new Vuex.Store({
 
   }
 })
+
+store.subscribe((mutation, state) => {
+	// Store the state object as a JSON string
+	console.log("mutation");
+	localStorage.setItem('store', JSON.stringify(state));
+});
+
+export default store

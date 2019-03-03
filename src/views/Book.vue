@@ -71,12 +71,14 @@
 					item.cid = cid;
 					item.city = this.details.city;
 					item.location = this.details.location;
-					this.$store.state.basket.push(item);
+					this.$store.commit('addToBasket', item);
+					// this.$store.state.basket.push(item);
 				} else {
 					console.log("already in basket", this.$store.state.basket);
 					let match = this.$store.state.basket[index];
 					match.quantity++;
-					this.$store.state.basket.splice(index, 1, match);
+					this.$store.commit('incrementBasket', cid);
+					// this.$store.state.basket.splice(index, 1, match);
 				}
 			}
 		},

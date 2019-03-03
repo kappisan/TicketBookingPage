@@ -12,6 +12,7 @@
 			</div>
 		</div>
 
+		<!-- https://codepen.io/Apirone/pen/wYvqLq -->
 		<div class="row mx-0 pt-5 d-flex justify-content-center">
 		  <div class="col-xs-4 col-sm-6 col-md-5 col-lg-4 col-xl-3">
 		    <div class="card shadow-lg">

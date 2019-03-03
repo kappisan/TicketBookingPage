@@ -11,11 +11,51 @@
 		      </ul>
 		</div>
 
-		<div class="gridContainer" v-show="screen == 'your-order'">
+		<div class="normalContainer" v-show="screen == 'your-order'">
+			<div class="basket-summary">
+				<div v-for="item in basket" class="basket-item">
+					<p>{{ item.quantity }} x {{ item.price }}</p>
+					<p>{{ item.name }}</p>
+					<p><b>Total:</b> {{ item.quantity * item.price }} </p>
+				</div>
+			</div>
+
 			<button v-on:click="screen = 'billing-address'">Billing Address</button>
 		</div>
 
-		<div class="gridContainer" v-show="screen == 'billing-address'">
+		<div class="normalContainer" v-show="screen == 'billing-address'">
+
+<!--
+			  <form action="#" id="addressForm">
+			    <h6>Billing Address</h6>
+			    <div class="inputCon" id="name" data-top="Line 1">
+			      <input type="text" placeholder="Address Line 1"/>
+			    </div>
+			    <div class="inputCon" id="name" data-top="Line 2">
+			      <input type="text" placeholder="Address Line 2"/>
+			    </div>
+			    <div class="inputCon" id="name" data-top="City">
+			      <input type="text" placeholder="City"/>
+			    </div>
+			    <div class="inputCon" id="name" data-top="Country">
+			      <input type="text" placeholder="Country"/>
+			    </div>
+			    <div class="inputCon" id="name" data-top="Postcode">
+			      <input type="text" placeholder="Postcode"/>
+			    </div>
+			  </form>
+-->
+			  <div class="div previousStep" v-on:click="screen = 'your-order'"> 
+			    <div class="arrow">
+					<svg version="1.1" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+						<g transform="translate(0 -540.36)">
+							<path d="m23.678 780.7v31.327h374.07l0.0162 24.857 90.559-40.521-90.559-40.521-0.0162 24.857z"/>
+						</g>
+					</svg>
+			    </div>
+			    <p>Previous Step   </p>
+			  </div>
+
 			<button v-on:click="screen = 'payment-details'">Card Details</button>
 		</div>
 
@@ -39,7 +79,7 @@
 		    <h4 class="name"> </h4>
 		    <h4 class="year">   </h4>
 		  </div>
-		  <div class="div previousStep"> 
+		  <div class="div previousStep" v-on:click="screen = 'billing-address'"> 
 		    <div class="arrow">
 				<svg version="1.1" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
 					<g transform="translate(0 -540.36)">
@@ -67,7 +107,19 @@
 		  </form>
 		</div>
 
-		<div class="gridContainer" v-show="screen == 'confirmation-screen'">
+		<div class="normalContainer" v-show="screen == 'confirmation-screen'">
+
+			  <div class="div previousStep" v-on:click="screen = 'payment-details'"> 
+			    <div class="arrow">
+					<svg version="1.1" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+						<g transform="translate(0 -540.36)">
+							<path d="m23.678 780.7v31.327h374.07l0.0162 24.857 90.559-40.521-90.559-40.521-0.0162 24.857z"/>
+						</g>
+					</svg>
+			    </div>
+			    <p>Previous Step   </p>
+			  </div>
+
 			<button v-on:click="screen = 'payment-details'">Confirm Payment</button>
 		</div>
 	</div>
@@ -97,15 +149,27 @@
 	  font-family: "Roboto", sans-serif;
 	}
 
+	.normalContainer {
+		position: absolute;
+		left: 50%;
+		top: 40%;
+		transform: translate(-50%,-50%);
+		min-height: 420px;
+		width: 670px;
+		min-width: 0;
+		background: whitesmoke;
+		-webkit-box-shadow: 0px 10px 200px 1px #c2c2c2;
+		box-shadow: 0px 10px 200px 1px #c2c2c2;
+	}
+
 	.gridContainer {
 		position: absolute;
 		left: 50%;
 		top: 40%;
 		transform: translate(-50%,-50%);
-		height: 420px;
+		min-height: 420px;
 		width: 670px;
 		min-width: 0;
-		min-height: 0;
 		background: whitesmoke;
 		-webkit-box-shadow: 0px 10px 200px 1px #c2c2c2;
 		box-shadow: 0px 10px 200px 1px #c2c2c2;
@@ -377,7 +441,7 @@
 	  text-transform: uppercase;
 	  letter-spacing: .5px;
 	  font-size: 13.5px;
-	  color: #acccdd;
+	  color: #fff;
 	  cursor: pointer;
 	  -webkit-transition: all 1s ease-out;
 	  -o-transition: all 1s ease-out;
@@ -419,6 +483,8 @@
 		},
 		methods: {
 			loadCard() {
+
+				// https://codepen.io/orzoon/pen/gdYLow?page=2
 
 				//INSPIRATION 
 				//------------> https://dribbble.com/shots/3331288-Daily-UI-002-Credit-Card-Checkout
