@@ -23,12 +23,15 @@
 </template>
 
 <style lang="scss">
-	button {
-		background-color: #333;
-		width: 300px;
-		color: #fff;
-		border-style: none;
-		height: 40px;
+	.tickets {
+		button {
+			background-color: #333;
+			width: 300px;
+			color: #fff;
+			border-style: none;
+			height: 40px;
+			margin: 10px;
+		}
 	}
 
 	.pay-with-btc {

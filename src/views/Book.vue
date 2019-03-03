@@ -1,8 +1,8 @@
 <template>
   <div class="tickets">
-    <h1>{{ details.location }}</h1>
-    <h2>{{ details.city }}</h2>
-	<h3>Total: {{ basketTotal }}</h3>
+    <h1>{{ details.location }} - {{ details.city }}</h1>
+    <!--<img :src="details.img">-->
+	<h4>Basket Total: &nbsp; £{{ basketTotal }}</h4>
     <div v-for="(item, index) in tickets" class="ticket">
     	<p>{{ item.name }} - {{ item.available }} - £{{ item.price }}</p>
     	<div class="button-container">
@@ -15,9 +15,11 @@
 	p {
 		display: inline-block;
 	}
-	button {
-		float: right;
-		margin: 10px;
+	.tickets {
+		button {
+			float: right;
+			margin: 10px;
+		}
 	}
 	.ticket {
 		clear: both;

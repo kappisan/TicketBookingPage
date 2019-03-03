@@ -427,7 +427,8 @@
 	  margin-left: 13px;
 	}
 
-	button {
+	.normalContainer button,
+	.gridContainer button {
 	  margin-top: 10px;
 	  grid-area: btn;
 	  height: 36px;

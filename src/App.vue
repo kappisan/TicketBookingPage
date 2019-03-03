@@ -1,17 +1,20 @@
 <template>
 	<div id="app">
 		<div id="nav">
-			<router-link to="/">Home</router-link>
-			<router-link to="/events">Events</router-link>
-			<div>
-				<router-link to="/basket">£{{ basketTotal }} <font-awesome-icon icon="shopping-basket" /></router-link>
+			<div class="nav-links">
+				<router-link to="/">Home</router-link>
+				<router-link to="/events">Events</router-link>
+				<a href="https://www.facebook.com/lavell.crawford.52" target="_blank">Follow Me</a>
+			</div>
+			<div class="basket-link">
+				<router-link to="/basket">£{{ basketTotal }} &nbsp; <font-awesome-icon icon="shopping-basket" /></router-link>
 			</div>
 		</div>
 		<div id="router-container">
 			<router-view/>
 		</div>
 		<div id="footer">
-			<p>footer</p>
+			<p>Copyright - Menacing Media 2019</p>
 		</div>
 	</div>
 </template>
@@ -23,10 +26,13 @@
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
 	color: #2c3e50;
-	margin: 100px 0 0 0;
+	margin: 70px 0 0 0;
 	position: absolute;
 	left: 0;
 	right: 0;
+	h1 {
+		margin-top: 40px;
+	}
 	#nav {
 		padding: 30px;
 		background-color: #000;
@@ -35,6 +41,13 @@
 		top: 0;
 		position: fixed;
 		z-index: 9;
+		.basket-link {
+			z-index: 99;
+		};
+		.nav-links {
+			position: absolute;
+			text-align: center;
+		}
 		div {
 			float: right;
 		}
@@ -58,6 +71,7 @@
 		background-color: #000;
 		left: 0;
 		bottom: 0;
+		padding: 40px;
 	}
 }
 </style>

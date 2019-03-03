@@ -3,13 +3,15 @@
     <div class="img-container">
       <img :src="path">
     </div>
-    <h1>{{ location }}</h1>
-    <p>{{ date }} {{ time }} <span class="city">{{ city }}</span></h1>
-    <p>Tickets available: {{ ticketsAvaialable }}</p>
-    <p class="text">{{ desc }}</p>
-    <router-link :to="'/book/'+ eid">
-      <button>Book Tickets</button>
-    </router-link>
+    <div class="content-container">
+      <h1>{{ location }}</h1>
+      <p>{{ date }} {{ time }} <span class="city">{{ city }}</span></p>
+      <p>Tickets available: {{ ticketsAvaialable }}</p>
+      <p class="text">{{ desc }}</p>
+      <router-link :to="'/book/'+ eid">
+        <button>Book Tickets</button>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -58,9 +60,8 @@ export default {
 <style scoped lang="scss">
 .event {
   background-color: #aaa;
-  width: 300px;
   display: inline-block;
-  margin: 10px;
+  margin: 10px 0;
   vertical-align: top;
   button {
     height: 40px;
@@ -75,10 +76,18 @@ export default {
     padding: 20px;
     text-align: justify;
   };
+  .content-container {
+    display: inline-block;
+    max-width: 700px;
+  };
   .img-container {
     height: 200px;
+    width: 300px;
+    display: inline-block;
+    margin: 0 10px;
     img {
-      width: 100%;
+      width: 300px;
+      margin-top: 10px;
     }
   }
 }
