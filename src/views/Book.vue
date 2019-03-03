@@ -3,9 +3,9 @@
     <h1>{{ details.location }}</h1>
     <h2>{{ details.city }}</h2>
 	<h3>Total: {{ basketTotal }}</h3>
-    <div v-for="item in tickets" class="ticket">
+    <div v-for="(item, index) in tickets" class="ticket">
     	<p>{{ item.name }} - {{ item.available }} - £{{ item.price }}</p>
-    	<Button v-on:click="addToBasket(item)">ADD</Button></div>
+    	<Button v-on:click="addToBasket(index)">ADD</Button></div>
   </div>
 </template>
 
@@ -42,10 +42,26 @@
 		},
 		methods: {
 		    ...mapMutations([]),
-			addToBasket(item) {
-				this.$store.state.basket.push(item);
-				console.log("add to basket", item, this.$store.state.basket);
-				// this.addToBasket('addToBasket', item)
+			addToBasket(key) {
+				let item = this.tickets[key];
+				console.log(index, "add to basket item", item);
+				let cid = item.tid + "-" + this.$route.params.id;
+				let index = this.$store.state.basket.map(function(e) { return e.cid; }).indexOf(cid);
+				
+				console.log("already in basket index", index);
+
+				if (index === -1) {
+					console.log("add to basket", this.$route.params.id, this.$store.state.basket);
+					item.quantity = 1;
+					item.eid = this.$route.params.id;
+					item.cid = cid;
+					this.$store.state.basket.push(item);
+				} else {
+					console.log("already in basket", this.$store.state.basket);
+					let match = this.$store.state.basket[index];
+					match.quantity++;
+					this.$store.state.basket.splice(index, 1, match);
+				}
 			}
 		},
 		mounted() {

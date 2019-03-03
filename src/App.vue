@@ -72,7 +72,7 @@
 		  Event
 		},
 		computed: {
-			...mapGetters(['basketTotal'])
+			...mapGetters(['basketItems', 'basketTotal'])
 		},
 		mounted() {
 			console.log("start app app main", this.basketTotal);

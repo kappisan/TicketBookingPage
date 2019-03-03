@@ -18,17 +18,20 @@ export default new Vuex.Store({
 				{
 					name: "Front Row",
 					price: 59.99,
-					available: 100
+					available: 100,
+					tid: "adult0"
 				},
 				{
 					name: "Middle Auditorium",
 					price: 39.99,
 					available: 200,
+					tid: "adult1"
 				},
 				{
 					name: "Balcony",
 					price: 89.99,
-					available: 20
+					available: 20,
+					tid: "adult2"
 				}
 			],
 			img: "https://cdn.venuescanner.com/photos/658e286008d6340dc8ed00431ff2efc2.jpg",
@@ -44,12 +47,14 @@ export default new Vuex.Store({
 				{
 					name: "Front Row",
 					price: 59.99,
-					available: 100
+					available: 100,
+					tid: "adult1"
 				},
 				{
 					name: "Middle Auditorium",
 					price: 39.99,
-					available: 200
+					available: 200,
+					tid: "adult2"
 				}
 			],
 			img: "https://s3-media3.fl.yelpcdn.com/bphoto/Jz9OdzMlznwjyPQZiwO8sA/o.jpg",
@@ -65,12 +70,14 @@ export default new Vuex.Store({
 				{
 					name: "Front Row",
 					price: 39.99,
-					available: 50
+					available: 50,
+					tid: "adult1"
 				},
 				{
 					name: "Regular",
 					price: 19.99,
-					available: 100
+					available: 100,
+					tid: "adult2"
 				}
 			],
 			img: "http://www.eharmony.co.uk/relationship-advice/wp-content/uploads/2014/01/The-Stand-Comedy-Club.jpg",
@@ -79,7 +86,7 @@ export default new Vuex.Store({
 	]
   },
   mutations: {
-    increment (state, item) {
+    addToBasket(state, item) {
       state.basket.push(item)
     }
   },
@@ -90,7 +97,16 @@ export default new Vuex.Store({
   	event: state => id => {
   		return state.events[0];
   	},
-  	basketTotal: state => state.basket.length
+  	basketItems: state => {
+		return state.basket.reduce((memo, item) => {
+			return memo + item.quantity;
+		}, 0)
+  	},
+  	basketTotal: state => {
+		return state.basket.reduce((memo, item) => {
+			return memo + (item.price * item.quantity);
+		}, 0)
+  	}
   },
   actions: {
 
