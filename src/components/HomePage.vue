@@ -3,8 +3,8 @@
     <div class="img-container">
       <img alt="Vue logo" src="../assets/mic-stand.jpg">
     </div>
-    <h1>{{ msg }}</h1>
-    <p>Home page</p>
+    <h1>Home page</h1>
+    <p>{{ msg }}</p>
   </div>
 </template>
 

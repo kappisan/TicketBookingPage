@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <HomePage msg="Welcome to Your Vue.js App"/>
+    <HomePage :msg="msg"/>
   </div>
 </template>
 
@@ -12,6 +12,9 @@ export default {
   name: 'home',
   components: {
     HomePage
-  }
+  },
+  data: () => ({
+  	msg: "test"
+  })
 }
 </script>

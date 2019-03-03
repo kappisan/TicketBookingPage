@@ -5,7 +5,9 @@
 	<h3>Total: {{ basketTotal }}</h3>
     <div v-for="(item, index) in tickets" class="ticket">
     	<p>{{ item.name }} - {{ item.available }} - £{{ item.price }}</p>
-    	<Button v-on:click="addToBasket(index)">ADD</Button></div>
+    	<div class="button-container">
+	    	<Button class="add-ticket" v-on:click="addToBasket(index)">ADD</Button></div>
+	    </div>
   </div>
 </template>
 
@@ -18,8 +20,19 @@
 		margin: 10px;
 	}
 	.ticket {
-		width: 100%;
-
+		clear: both;
+		margin: 20px;
+		border-style: solid;
+		border-radius: 4px;
+		border-width: 2px;
+		border-color: #666;
+		padding: 20px;
+	}
+	.button-container {
+		text-align: right;
+	}
+	.add-ticket {
+		float: none;
 	}
 </style>
 
@@ -44,7 +57,8 @@
 		    ...mapMutations([]),
 			addToBasket(key) {
 				let item = this.tickets[key];
-				console.log(index, "add to basket item", item);
+				console.log("add to basket item", item);
+				console.log("add from", this.details);
 				let cid = item.tid + "-" + this.$route.params.id;
 				let index = this.$store.state.basket.map(function(e) { return e.cid; }).indexOf(cid);
 				
@@ -55,6 +69,8 @@
 					item.quantity = 1;
 					item.eid = this.$route.params.id;
 					item.cid = cid;
+					item.city = this.details.city;
+					item.location = this.details.location;
 					this.$store.state.basket.push(item);
 				} else {
 					console.log("already in basket", this.$store.state.basket);
