@@ -12,39 +12,33 @@
 		</div>
 
 		<div class="normalContainer" v-show="screen == 'your-order'">
-			<div class="basket-summary">
-				<div v-for="item in basket" class="basket-item">
-					<p>{{ item.quantity }} x {{ item.price }}</p>
-					<p>{{ item.name }}</p>
-					<p><b>Total:</b> £{{ item.quantity * item.price }} </p>
-				</div>
-			</div>
+			<BasketSummary />
 
 			<button v-on:click="screen = 'billing-address'">Billing Address</button>
 		</div>
 
 		<div class="normalContainer" v-show="screen == 'billing-address'">
 
-<!--
-			  <form action="#" id="addressForm">
-			    <h6>Billing Address</h6>
-			    <div class="inputCon" id="name" data-top="Line 1">
-			      <input type="text" placeholder="Address Line 1"/>
-			    </div>
-			    <div class="inputCon" id="name" data-top="Line 2">
-			      <input type="text" placeholder="Address Line 2"/>
-			    </div>
-			    <div class="inputCon" id="name" data-top="City">
-			      <input type="text" placeholder="City"/>
-			    </div>
-			    <div class="inputCon" id="name" data-top="Country">
-			      <input type="text" placeholder="Country"/>
-			    </div>
-			    <div class="inputCon" id="name" data-top="Postcode">
-			      <input type="text" placeholder="Postcode"/>
-			    </div>
-			  </form>
--->
+		  <form action="#" id="addressForm">
+		    <h6>Billing Address</h6>
+		    <div class="addressInputCon" data-top="Address Line 1">
+		      <input type="text" placeholder="70-72 The Havens"/>
+		    </div>
+		    <div class="addressInputCon" data-top="Address Line 2" title = "type in the card number without spaces">
+		      <input type="text" placeholder="Ransomes Europark"/>
+		    </div>
+		    <div class="addressInputCon" data-top="City">
+		      <input type="text" placeholder="Ipswich"/>
+		    </div>
+		    <div class="addressInputCon" data-top="Country">
+		      <input type="text" placeholder="England"/>
+		    </div>
+		    <div class="addressInputCon" data-top="Post Code">
+		      <input type="text" placeholder="IP3 9BF"/>
+		    </div>
+		  </form>
+			
+
 			  <div class="div previousStep" v-on:click="screen = 'your-order'"> 
 			    <div class="arrow">
 					<svg version="1.1" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
@@ -180,23 +174,23 @@
 	}
 
 	.linkContainer .topLinks {
-	  grid-area: link;
-	  list-style-type: none;
-	  display: grid;
-	  grid-template-columns: repeat(4, 1fr);
-	  -webkit-box-shadow: 0px 1.5px 1px #eaeaea;
-	  box-shadow: 0px 1.5px 1px #eaeaea;
+		grid-area: link;
+		list-style-type: none;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		-webkit-box-shadow: 0px 1.5px 1px #eaeaea;
+		box-shadow: 0px 1.5px 1px #eaeaea;
 	}
 
 	.linkContainer .topLinks li {
-	  display: block;
-	  padding: 14px 0px;
-	  text-transform: uppercase;
-	  font-size: .58rem;
-	  justify-self: center;
-	  letter-spacing: .7px;
-	  font-weight: 600;
-	  color: #acc8d5;
+		display: block;
+		padding: 14px 0px;
+		text-transform: uppercase;
+		font-size: .58rem;
+		justify-self: center;
+		letter-spacing: .7px;
+		font-weight: 600;
+		color: #acc8d5;
 	}
 
 	.linkContainer .topLinks .active {
@@ -345,7 +339,8 @@
 	  fill: #3580aa;
 	}
 
-	form {
+	#addressForm,
+	#paymentForm {
 	  margin: 0;
 	  padding: 0;
 	  grid-area: form;
@@ -353,6 +348,9 @@
 	  width: 200px;
 	  min-height: 0;
 	  min-width: 0;
+	}
+
+	#paymentForm {
 	  display: grid;
 	  justify-self: center;
 	  grid-template: 45px repeat(5, 1fr) 55px/repeat(2, 1fr);
@@ -365,7 +363,17 @@
 	 ". .";
 	}
 
-	form input {
+	#addressForm {
+		width: 100%;
+	    padding: 40px;
+	}
+	#addressForm input {
+		margin: 20px;
+	}
+
+
+	#addressForm input,
+	#paymentForm input {
 	  position: relative;
 	  margin-top: -12px;
 	  border: 0;
@@ -379,11 +387,13 @@
 	  color: #000;
 	}
 
-	form input:focus {
+	#addressForm input:focus,
+	#paymentForm input:focus {
 	  border-bottom: 1.5px solid #9ad0dd;
 	}
 
-	form input:focus + h6 {
+	#addressForm input:focus + h6,
+	#paymentForm input:focus + h6 {
 	  color: red;
 	}
 
@@ -392,6 +402,11 @@
 	  font-size: 20px;
 	}
 
+	.addressInputCon {
+		margin: 10px 0;
+	}
+
+	.addressInputCon,
 	.inputCon {
 	  min-width: 0;
 	  min-height: 0;
@@ -399,6 +414,7 @@
 	  color: #c1c1c1;
 	}
 
+	.addressInputCon:after,
 	.inputCon:after {
 	  position: absolute;
 	  content: attr(data-top);
@@ -463,14 +479,16 @@
 </style>
 
 <script>
-	import { mapGetters, mapMutations } from 'vuex';
+	import { mapGetters } from 'vuex';
 
 	import { store } from '../store.js';
+
+	import BasketSummary from '@/components/BasketSummary.vue';
 
 	export default {
 		name: 'checkout',
 		components: {
-		  Event
+		  BasketSummary
 		},
 		data: () => ({
 			screen: 'your-order'
@@ -493,7 +511,7 @@
 
 				console.log("LOADING CARD");
 			    // forms
-			    let inputs = document.querySelectorAll("input");
+			    let inputs = document.querySelectorAll("#paymentForm input");
 			    let ccList = document.querySelectorAll(".ccList li");
 			    let name = document.querySelector(".name");
 			    let year = document.querySelector(".year");

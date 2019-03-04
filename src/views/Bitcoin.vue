@@ -4,13 +4,7 @@
 		<h3>Items: {{ basketItems }}</h3>
 		<h3>Total: £{{ basketTotal }}</h3>
 
-		<div class="basket-summary">
-			<div v-for="item in basket" class="basket-item">
-				<p>{{ item.quantity }} x {{ item.price }}</p>
-				<p>{{ item.name }}</p>
-				<p><b>Total:</b> {{ item.quantity * item.price }} </p>
-			</div>
-		</div>
+		<BasketSummary />
 
 		<!-- https://codepen.io/Apirone/pen/wYvqLq -->
 		<div class="row mx-0 pt-5 d-flex justify-content-center">
@@ -34,29 +28,23 @@
 </template>
 
 <style lang="scss">
-	.basket-summary {
-		margin-bottom: 60px;	
-	}
 	.text-center {
 		width: 100%;
 	}
 </style>
 
 <script>
-	import { mapGetters, mapMutations } from 'vuex';
+	import { mapGetters } from 'vuex';
 
-	import { store } from '../store.js';
+	import BasketSummary from '@/components/BasketSummary.vue';
 
 	export default {
 		name: 'bitcoin',
 		components: {
-		  Event
+		  BasketSummary
 		},
 		computed: {
 			...mapGetters(['basket', 'basketTotal', 'basketTotalBTC', 'basketItems'])
-		},
-		mounted() {
-			console.log("start app basket", this.basket);
 		}
 	}
 
