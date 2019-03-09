@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 import createPersistedState from 'vuex-persistedstate'
 import * as _ from 'lodash'
@@ -22,6 +23,10 @@ const store = new Vuex.Store({
   plugins: [createPersistedState()],
   state: {
   	count: 0,
+  	btcPriceGBP: 3000,
+  	btcPriceUSD: 4000,
+  	btcPriceEUR: 3500,
+  	btcPriceAge: null,
   	basket: [],
 	events: [
 		{
@@ -105,17 +110,32 @@ const store = new Vuex.Store({
     addToBasket(state, item) {
       state.basket.push(item)
     },
+    updateBTCPrice(state, item) {
+		console.log("updating btc price");
+		axios
+			.get('https://api.coindesk.com/v1/bpi/currentprice.json')
+			.then(response => {
+				console.log("got coindesk data", response.data);
+				const bpi = response.data.bpi;
+				state.btcPriceGBP = bpi.GBP.rate_float;
+				state.btcPriceUSD = bpi.USD.rate_float;
+				state.btcPriceEUR = bpi.EUR.rate_float;
+				state.btcPriceAge = response.data.time.updated;
+			})
+    },
     incrementBasket(state, cid) {
     	console.log("incrementBasket");
-		let match = _.findIndex(state.basket, {cid: cid})
+		const match = _.findIndex(state.basket, {cid: cid})
 		if (match) {
 		    state.basket[match].quantity++;
 		}
     },
     removeFromBasket(state, cid) {
-    	console.log("incrementBasket");
-		let match = _.findIndex(state.basket, {cid: cid})
-		if (match) {
+    	console.log("removeFromBasket", cid);
+		const match = _.findIndex(state.basket, {cid: cid})
+    	console.log("removeFromBasket match", match);
+    	// also remove zero index
+		if (match || match === 0) {
 		    state.basket.splice(match, 1);
 		}
     }
@@ -140,8 +160,13 @@ const store = new Vuex.Store({
   	basketTotalBTC: state => {
 		return state.basket.reduce((memo, item) => {
 			return memo + (item.price * item.quantity);
-		}, 0) * 0.00035 // @TODO: get BTC exchange rate
-  	}
+		}, 0) / state.btcPriceGBP
+  	},
+  	gbpPriceBTC: state => {
+  		return 1 / state.btcPriceGBP
+  	},
+  	gbpPriceAge: state => state.btcPriceAge,
+  	btcPriceGBP: state => state.btcPriceGBP
   },
   actions: {
 
@@ -150,7 +175,7 @@ const store = new Vuex.Store({
 
 store.subscribe((mutation, state) => {
 	// Store the state object as a JSON string
-	console.log("mutation");
+	console.log("update local storage");
 	localStorage.setItem('store', JSON.stringify(state));
 });
 

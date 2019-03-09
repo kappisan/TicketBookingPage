@@ -72,6 +72,7 @@
 					item.eid = this.$route.params.id;
 					item.cid = cid;
 					item.city = this.details.city;
+					item.date = this.details.date;
 					item.location = this.details.location;
 					this.$store.commit('addToBasket', item);
 					// this.$store.state.basket.push(item);

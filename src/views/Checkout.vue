@@ -216,10 +216,17 @@
 	  min-width: 0;
 	  min-height: 0;
 	  color: #fff;
+	  /* blue gradient */
+	  /*
 	  background: -webkit-gradient(linear, left top, right top, color-stop(60%, #4092b5), color-stop(90%, #3580aa));
 	  background: -webkit-linear-gradient(left, #4092b5 60%, #3580aa 90%);
 	  background: -o-linear-gradient(left, #4092b5 60%, #3580aa 90%);
 	  background: linear-gradient(to right, #4092b5 60%, #3580aa 90%);
+	  */
+
+	  /* vaporwave gradient */
+	  background: linear-gradient(to top right, #904070 7%, #3580aa 85%);
+
 	  margin-top: 82px;
 	  border-radius: 8px;
 	  justify-self: right;

@@ -14,7 +14,7 @@
 			<router-view/>
 		</div>
 		<div id="footer">
-			<p>Copyright - Menacing Media 2019</p>
+			<p>Copyright - <a href="https://menacingmedia.com" target="_blank">Menacing Media 2019</a></p>
 		</div>
 	</div>
 </template>
@@ -30,11 +30,15 @@
 	position: absolute;
 	left: 0;
 	right: 0;
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
 	h1 {
 		margin-top: 40px;
 	}
 	#nav {
-		padding: 30px;
+		padding: 20px;
 		background-color: #000;
 		left: 0;
 		right: 0;
@@ -43,6 +47,7 @@
 		z-index: 9;
 		.basket-link {
 			z-index: 99;
+    		padding-top: 20px;
 		};
 		.nav-links {
 			position: absolute;

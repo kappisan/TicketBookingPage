@@ -59,10 +59,12 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .event {
-  background-color: #aaa;
+  border-color: #aaa;
   display: inline-block;
   margin: 10px 0;
   vertical-align: top;
+  border-style: solid;
+  border-width: 0 0 2px 0;
   button {
     height: 40px;
     width: 200px;

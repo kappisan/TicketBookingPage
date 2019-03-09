@@ -2,6 +2,8 @@
   <div class="basket-summary">
     <div v-for="item in basket" class="basket-item">
       <p>{{ item.quantity }} x {{ item.price }}</p>
+      <p>{{ item.date }}</p>
+      <p>{{ item.location }}, {{ item.city }}</p>
       <p>{{ item.name }}</p>
       <p><b>Total:</b> {{ item.quantity * item.price }} </p>
     </div>

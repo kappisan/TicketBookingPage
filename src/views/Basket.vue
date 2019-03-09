@@ -3,8 +3,12 @@
 		<h1>BASKET</h1>
 		<h3>Items: {{ basketItems }}</h3>
 		<h3>Basket Total: &nbsp; £{{ basketTotal }}</h3>
+
+		<!-- with option to delete -->
 		<div v-for="item in basket" class="basket-item">
 			<p>{{ item.quantity }} x {{ item.price }}</p>
+			<p>{{ item.date }}</p>
+			<p>{{ item.location }}, {{ item.city }}</p>
 			<p>{{ item.name }}</p>
 			<p><b>Total:</b> £{{ item.quantity * item.price }} </p>
 			<p v-on:click="removeFromBasket(item.cid)"><font-awesome-icon icon="trash-alt" /></p>
@@ -26,7 +30,8 @@
 	.tickets {
 		button {
 			background-color: #333;
-			width: 300px;
+			max-width: 300px;
+			width: 100%;
 			color: #fff;
 			border-style: none;
 			height: 40px;
@@ -54,10 +59,12 @@
 
 	import { store } from '../store.js';
 
+	import BasketSummary from '@/components/BasketSummary.vue';
+
 	export default {
 		name: 'basket',
 		components: {
-		  Event
+		  BasketSummary
 		},
 		methods: {
 			removeFromBasket(cid) {
