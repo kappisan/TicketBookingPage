@@ -130,6 +130,9 @@ const store = new Vuex.Store({
 		    state.basket[match].quantity++;
 		}
     },
+    clearBasket (state) {
+      state.basket = [];
+    },
     removeFromBasket(state, cid) {
     	console.log("removeFromBasket", cid);
 		const match = _.findIndex(state.basket, {cid: cid})

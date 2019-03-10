@@ -103,18 +103,32 @@
 
 		<div class="normalContainer" v-show="screen == 'confirmation-screen'">
 
-			  <div class="div previousStep" v-on:click="screen = 'payment-details'"> 
-			    <div class="arrow">
-					<svg version="1.1" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-						<g transform="translate(0 -540.36)">
-							<path d="m23.678 780.7v31.327h374.07l0.0162 24.857 90.559-40.521-90.559-40.521-0.0162 24.857z"/>
-						</g>
-					</svg>
-			    </div>
-			    <p>Previous Step   </p>
-			  </div>
+			<div v-show="!busy && !paymentCompleted">
+				<div class="div previousStep" v-on:click="screen = 'payment-details'"> 
+				    <div class="arrow">
+						<svg version="1.1" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+							<g transform="translate(0 -540.36)">
+								<path d="m23.678 780.7v31.327h374.07l0.0162 24.857 90.559-40.521-90.559-40.521-0.0162 24.857z"/>
+							</g>
+						</svg>
+				    </div>
+				    <p>Previous Step   </p>
+				</div>
+				<form action="#" id="addressForm">
+				    <div class="addressInputCon" data-top="email address">
+						<input v-model="email" type="text" placeholder="name@company.com"/>
+				    </div>
+				</form>
+				<button v-on:click="sendPayment">Send Payment</button>
+			</div>
+			<div v-show="paymentCompleted && paymentSucceeded" style="padding: 40px">
+				<p>payment succeeded</p>
+			</div>
+			<div v-show="paymentCompleted && !paymentSucceeded" style="padding: 40px">
+				<p>payment failed</p>
+			</div>
 
-			<button v-on:click="screen = 'payment-details'">Confirm Payment</button>
+			<Spinner msg="Processing Payment..." v-show="busy" />
 		</div>
 	</div>
 
@@ -486,19 +500,28 @@
 </style>
 
 <script>
+
+	import axios from 'axios'
+
 	import { mapGetters } from 'vuex';
 
 	import { store } from '../store.js';
 
 	import BasketSummary from '@/components/BasketSummary.vue';
+	import Spinner from '@/components/Spinner.vue';
 
 	export default {
 		name: 'checkout',
 		components: {
-		  BasketSummary
+		  BasketSummary,
+		  Spinner
 		},
 		data: () => ({
-			screen: 'your-order'
+			screen: 'your-order',
+			email: '',
+			busy: false,
+			paymentCompleted: false,
+			paymentSucceeded: false
 		}),
 		computed: {
 			...mapGetters(['basket', 'basketTotal', 'basketItems'])
@@ -508,6 +531,32 @@
 			this.loadCard();
 		},
 		methods: {
+			sendPayment() {
+				this.busy = true;
+				const payment = {
+					email: this.email,
+					amount: this.basketTotal,
+					eventID: 'test'
+				}
+				console.log("make payment JSON post call here", payment)
+
+		        axios
+		          .post('https://m25hqax3sj.execute-api.us-east-1.amazonaws.com/default/purchase', payment)
+		          .then(response => {
+		          	console.log("AXIOS make purchase response", response)
+					this.busy = false;
+					this.paymentCompleted = true;
+
+					if (response && response.data && response.data.statusCode == "200") {
+						console.log("payment succeeded, clearing basket");
+						this.paymentSucceeded = true;
+						this.$store.commit('clearBasket');
+					} else {
+						console.log("payment failed");
+						this.paymentSucceeded = false;
+					}
+		          })
+			},
 			loadCard() {
 
 				// https://codepen.io/orzoon/pen/gdYLow?page=2
