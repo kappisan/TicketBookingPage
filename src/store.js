@@ -128,6 +128,7 @@ const store = new Vuex.Store({
 		const match = _.findIndex(state.basket, {cid: cid})
 		if (match) {
 		    state.basket[match].quantity++;
+		    state.basket = _.cloneDeep(state.basket);
 		}
     },
     clearBasket (state) {

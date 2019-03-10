@@ -114,7 +114,7 @@
 				    </div>
 				    <p>Previous Step   </p>
 				</div>
-				<form action="#" id="addressForm">
+				<form action="#" id="emailAddressForm">
 				    <div class="addressInputCon" data-top="email address">
 						<input v-model="email" type="text" placeholder="name@company.com"/>
 				    </div>
@@ -360,6 +360,7 @@
 	  fill: #3580aa;
 	}
 
+	#emailAddressForm,
 	#addressForm,
 	#paymentForm {
 	  margin: 0;
@@ -384,15 +385,19 @@
 	 ". .";
 	}
 
+	#emailAddressForm,
 	#addressForm {
 		width: 100%;
 	    padding: 40px;
 	}
+
+	#emailAddressForm input,
 	#addressForm input {
 		margin: 20px;
 	}
 
 
+	#emailAddressForm input,
 	#addressForm input,
 	#paymentForm input {
 	  position: relative;
@@ -408,11 +413,13 @@
 	  color: #000;
 	}
 
+	#emailAddressForm input:focus,
 	#addressForm input:focus,
 	#paymentForm input:focus {
 	  border-bottom: 1.5px solid #9ad0dd;
 	}
 
+	#emailAddressForm input:focus + h6,
 	#addressForm input:focus + h6,
 	#paymentForm input:focus + h6 {
 	  color: red;
@@ -532,6 +539,19 @@
 		},
 		methods: {
 			sendPayment() {
+
+			    let inputs = document.querySelectorAll("#emailAddressForm input");
+
+				if (!this.email) {
+					return console.log("no email address")
+				} 
+
+				const emailRegEx = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/
+
+				if (this.email.match(emailRegEx) == null) {
+					return console.log("invalid email address")
+				}
+
 				this.busy = true;
 				const payment = {
 					email: this.email,
