@@ -75,12 +75,13 @@
 					item.date = this.details.date;
 					item.location = this.details.location;
 					this.$store.commit('addToBasket', item);
-					// this.$store.state.basket.push(item);
 				} else {
 					console.log("already in basket", this.$store.state.basket);
 					let match = this.$store.state.basket[index];
 					match.quantity++;
 					this.$store.commit('incrementBasket', cid);
+					console.log("added already in basket", this.basket);
+					console.log("added already in basket", this.basketTotal)
 					// this.$store.state.basket.splice(index, 1, match);
 				}
 			}
@@ -88,7 +89,7 @@
 		mounted() {
 			console.log("start app book url params", this.$route.params.id);
 			console.log("start app book", this.basket);
-			this.details = this.event("1");
+			this.details = this.event(this.$route.params.id);
 			this.tickets = this.details.tickets;
 			console.log("start app book details", this.details);
 		}

@@ -149,7 +149,10 @@ const store = new Vuex.Store({
   	events: state => state.events,
   	basket: state => state.basket,
   	event: state => id => {
-  		return state.events[0];
+  		console.log("GET EVENT BY ID", id);
+  		let index = _.findIndex(state.events, (ev) =>{ return ev.eid == id })
+  		if (index !== -1) return state.events[index];
+  		return {};
   	},
   	basketItems: state => {
 		return state.basket.reduce((memo, item) => {
@@ -157,9 +160,9 @@ const store = new Vuex.Store({
 		}, 0)
   	},
   	basketTotal: state => {
-		return state.basket.reduce((memo, item) => {
+		return Math.round(state.basket.reduce((memo, item) => {
 			return memo + (item.price * item.quantity);
-		}, 0)
+		}, 0) * 100) / 100
   	},
   	basketTotalBTC: state => {
 		return state.basket.reduce((memo, item) => {
