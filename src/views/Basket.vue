@@ -22,6 +22,9 @@
 		<router-link to="/checkout">
 			<button><font-awesome-icon icon="credit-card" /> &nbsp; PAY BY CARD</button>
 		</router-link>
+		<div style="display: inline-block; width: 300px;">
+			<Stripe :amount="basketTotal * 100" />
+		</div>
 	</div>
 
 </template>
@@ -60,11 +63,13 @@
 	import { store } from '../store.js';
 
 	import BasketSummary from '@/components/BasketSummary.vue';
+	import Stripe from '@/components/Stripe.vue';
 
 	export default {
 		name: 'basket',
 		components: {
-		  BasketSummary
+		  BasketSummary,
+		  Stripe
 		},
 		methods: {
 			removeFromBasket(cid) {
