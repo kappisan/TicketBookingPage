@@ -13,7 +13,7 @@
       @closed="closed"
       @canceled="canceled"
     ></vue-stripe-checkout>
-    <button @click="checkout">PAY WITH STRIPE</button>
+    <button @click="checkout"><font-awesome-icon :icon="['fab', 'stripe']" /> &nbsp; PAY WITH STRIPE</button>
   </div>
 </template>
  
