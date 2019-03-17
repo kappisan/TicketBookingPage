@@ -28,6 +28,8 @@ const store = new Vuex.Store({
   	btcPriceEUR: 3500,
   	btcPriceAge: null,
   	basket: [],
+  	events: []
+  	/*
 	events: [
 		{
 			eid: "brixton",
@@ -105,6 +107,7 @@ const store = new Vuex.Store({
 			desc: "With solo shows from better known performers and prime stand-up every weekend, there’s always something going on at The Stand Comedy Club Glasgow!"
 		}
 	]
+	*/
   },
   mutations: {
     addToBasket(state, item) {
@@ -121,6 +124,25 @@ const store = new Vuex.Store({
 				state.btcPriceUSD = bpi.USD.rate_float;
 				state.btcPriceEUR = bpi.EUR.rate_float;
 				state.btcPriceAge = response.data.time.updated;
+			})
+    },
+    updateEvents(state) {
+		console.log("updating events from AWS");
+		axios
+			.get('https://m25hqax3sj.execute-api.us-east-1.amazonaws.com/default/events')
+			.then(response => {
+				console.log("got events data from AWS", response.data.Items);
+				let events = response.data.Items
+				events.forEach((e) => {
+					if (typeof e.tickets == 'string') {
+						e.eid = e.event_id;
+						try {
+							e.tickets = JSON.parse(e.tickets);
+						} catch(e) {}
+					}
+				})
+
+				state.events = events;
 			})
     },
     incrementBasket(state, cid) {

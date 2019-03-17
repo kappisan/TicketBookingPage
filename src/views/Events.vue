@@ -29,6 +29,7 @@
 			...mapGetters(['events'])
 		},
 		mounted() {
+			this.$store.commit('updateEvents');
 			console.log("start app", this.events);
 		}
 	}
